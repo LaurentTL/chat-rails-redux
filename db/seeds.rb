@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'facker'
+
 Message.destroy_all
 Channel.destroy_all
 User.destroy_all
@@ -17,7 +19,10 @@ channels = names.map do |name|
 end
 
 users = nicknames.map do |nickname|
-  User.create(email: "#{nickname}@lewagon.com", nickname: nickname, password: "test")
+  User.create(email: "#{nickname.downcase}@lewagon.com", nickname: nickname, password: "test")
 end
 
+20.times do
+  Message.create! user: users.sample, channel: channels.sample, content: Faker::TvShows::HowIMetYourMother.quote
+end
 
