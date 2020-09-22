@@ -8,3 +8,16 @@
 Message.destroy_all
 Channel.destroy_all
 User.destroy_all
+
+names = w%{general react paris}
+nicknames = w%{Laurent Thanh-an Thomas Vorachit}
+
+channels = names.map do |name|
+  Channel.find_or_created_by(name: name)
+end
+
+users = nicknames.map do |nickname|
+  User.create(email: "#{nickname}@lewagon.com", nickname: nickname, password: "test")
+end
+
+
